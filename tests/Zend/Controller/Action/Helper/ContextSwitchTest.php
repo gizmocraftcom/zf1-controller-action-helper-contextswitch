@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test class for Zend_Controller_Action_Helper_ContextSwitch.
@@ -29,10 +30,10 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Action
- * @group      Zend_Controller_Action_Helper
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Action')]
+#[Group('Zend_Controller_Action_Helper')]
 class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\TestCase
 {
     protected $helper;
@@ -814,9 +815,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
         $this->checkOptionsAreSet();
     }
 
-    /**
-     * @group ZF-3279
-     */
+    #[Group('ZF-3279')]
     public function testPostJsonContextDoesntThrowExceptionWhenGetVarsMethodsExists()
     {
         try {
@@ -828,9 +827,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
         }
     }
 
-    /**
-     * @group ZF-3279
-     */
+    #[Group('ZF-3279')]
     public function testPostJsonContextThrowsExceptionWhenGetVarsMethodsDoesntExist()
     {
         $view = new Zend_Controller_Action_Helper_ContextSwitchText_CustomView();
@@ -841,9 +838,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
         $this->helper->postJsonContext();
     }
 
-    /**
-     * @group ZF-4866
-     */
+    #[Group('ZF-4866')]
     public function testForwardingShouldNotUseContextSuffixIfNewActionDoesNotDetectValidContext()
     {
         $this->request->setParam('format', 'xml')
@@ -858,9 +853,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
         $this->assertStringNotContainsString('xml', $suffix, $suffix);
     }
 
-    /**
-     * @group ZF-4866
-     */
+    #[Group('ZF-4866')]
     public function testForwardingShouldNotPrependMultipleViewSuffixesForCustomContexts()
     {
         $this->helper->addContext('foo', array('suffix' => 'foo'));
@@ -882,9 +875,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
         $this->assertStringNotContainsString('foo.foo', $suffix, $suffix);
     }
 
-    /**
-     * @group ZF-11793
-     */
+    #[Group('ZF-11793')]
     public function testGetActionContextsReturnsFullListWhenArgumentIsNull()
     {
         $expected = array(
